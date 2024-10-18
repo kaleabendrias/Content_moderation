@@ -1,7 +1,10 @@
-const express = require('express');
-const multer = require('multer');
-const { moderateImg } = require('../controllers/moderationController');
-const { moderateTxt } = require('../controllers/moderationController')
+const express = require("express");
+const multer = require("multer");
+const {
+  moderateImg,
+  moderateAud,
+} = require("../controllers/moderationController");
+const { moderateTxt } = require("../controllers/moderationController");
 
 const router = express.Router();
 
@@ -45,7 +48,7 @@ const upload = multer({ storage });
  *       500:
  *         description: Internal Server Error
  */
-router.post('/image', upload.single('file'), moderateImg);
+router.post("/image", upload.single("file"), moderateImg);
 
 /**
  * @swagger
@@ -84,6 +87,8 @@ router.post('/image', upload.single('file'), moderateImg);
  *       500:
  *         description: Internal Server Error
  */
-router.post('/text',  moderateTxt);
+router.post("/text", moderateTxt);
+
+router.post("/audio", upload.single("file"), moderateAud);
 
 module.exports = router;
