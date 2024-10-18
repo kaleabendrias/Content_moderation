@@ -93,14 +93,15 @@ const moderateAudio = async (audio) => {
       {
         headers: { Authorization: `Bearer ${process.env.HUGGINGFACE_API_KEY}`, 'Content-Type': 'audio/wav', },
         params: {
-          return_timestamps: true, // Enable timestamp generation for long audio
+          return_timestamps: true, // not working currently
         },
       }
     );
 
     const transcription = response.data.text;
     console.log("Transcription:", transcription);
-    moderateText(transcription);
+    const moderatedAudio = moderateText(transcription);
+    return moderatedAudio;
   } catch (err) {
     console.log(err);
   }
